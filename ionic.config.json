@@ -1,0 +1,8 @@
+{
+  "name": "buscafarma",
+  "app_id": "f608c28d",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
