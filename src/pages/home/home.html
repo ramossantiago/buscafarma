@@ -6,8 +6,17 @@ BuscaFarma
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+<ion-content>
+  <agm-map 
+            [latitude]="lat" 
+            [longitude]="lng" 
+            [zoom]="16"
+            [zoomControl]="false"
+            [panControl]="false"
+            [clickableIcons]="false">
+      <agm-marker [latitude]="lat" 
+                  [longitude]="lng"
+                  >
+      </agm-marker>
   </agm-map>
 </ion-content>
