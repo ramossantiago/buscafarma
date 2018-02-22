@@ -6,6 +6,9 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  lat: number = -0.292557;
+  lng: number = -78.478322;
+
 
   constructor(public navCtrl: NavController) {
 

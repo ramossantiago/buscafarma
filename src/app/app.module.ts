@@ -7,6 +7,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
+// mapas 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -14,7 +17,10 @@ import { HomePage } from '../pages/home/home';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC_bd32QA5WkQct4Ah0iwEIzYI4KQqbbOo'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
