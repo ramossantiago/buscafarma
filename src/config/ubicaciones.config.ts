@@ -1,0 +1,2 @@
+
+export const URL_SERVICIOS = "http://localhost:8080/pruebaRest/rest/servicio/ubicaciones"

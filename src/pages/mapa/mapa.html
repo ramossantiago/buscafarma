@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button small right
+            (click)="buscarUbicaciones()" >
+      Buscar
+    </button>
+    <button ion-button small right
+            (click)="limpiarBusqueda()">
+        Limpiar
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <agm-map  [latitude]="posicionProvider.lat"
+            [longitude]="posicionProvider.lng"
+            [zoom]="15"
+            [zoomControl]="false"
+            [panControl]="false"
+            [clickableIcons]="false"
+            >
+
+    <agm-marker [latitude]="posicionProvider.lat"
+                [longitude]="posicionProvider.lng"
+                [markerDraggable]="true"
+                [markerClickable]="true"
+                [animation]="animation"
+                (dragEnd)="capturarMovimiento($event)"
+                (markerClick)="click($event)"
+                >
+      <agm-info-window>
+        Aqui estas
+      </agm-info-window>
+    </agm-marker>
+
+    <agm-marker *ngFor="let ubicacion of ubicacionesProvider.ubicaciones"
+                [latitude]="ubicacion.posicion.latitud"
+                [longitude]="ubicacion.posicion.longitud"
+                [markerClickable]="true"
+
+                >
+      <agm-info-window>
+      {{ubicacion.titulo}}
+      </agm-info-window>
+    </agm-marker>
+
+    <agm-circle [visible]="circuloBusqueda"
+                [latitude]="posicionProvider.lat"
+                [longitude]="posicionProvider.lng"
+                [radius]="radioBusqueda">
+    </agm-circle>
+  </agm-map>
+</ion-content>
