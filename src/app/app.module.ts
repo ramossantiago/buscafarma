@@ -5,27 +5,41 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage, MapaPage, BuscarPage } from '../pages/index.paginas';
+import { HomePage, MapaPage, BuscarPage, DetalleUbicacionPage } from '../pages/index.paginas';
 
 // mapas
 import { AgmCoreModule } from '../core/core.module';
 import { Geolocation } from '@ionic-native/geolocation';
 import { UbicacionesProvider } from '../providers/ubicaciones/ubicaciones';
+import { GoogleServicesProvider } from '../providers/google-services/google-services';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PosicionProvider } from '../providers/posicion/posicion';
+import { LoaderUtilProvider } from '../providers/utils/loader-util';
 
+// pipes
+import { ImagenPipe } from "../pipes/imagen/imagen";
+import { ImagenMiniaturaPipe } from "../pipes/imagen-miniatura/imagen-miniatura";
+
+// config
+import { GOOGLE_API_KEY } from "../config/google.config";
+
+// native
+import { CallNumber } from '@ionic-native/call-number';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     MapaPage,
-    BuscarPage
+    BuscarPage,
+    DetalleUbicacionPage,
+    ImagenPipe,
+    ImagenMiniaturaPipe
   ],
   imports: [
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_bd32QA5WkQct4Ah0iwEIzYI4KQqbbOo'
+      apiKey: GOOGLE_API_KEY
     }),
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -36,7 +50,8 @@ import { PosicionProvider } from '../providers/posicion/posicion';
     MyApp,
     HomePage,
     MapaPage,
-    BuscarPage
+    BuscarPage,
+    DetalleUbicacionPage
   ],
   providers: [
     StatusBar,
@@ -44,7 +59,10 @@ import { PosicionProvider } from '../providers/posicion/posicion';
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UbicacionesProvider,
-    PosicionProvider
+    PosicionProvider,
+    LoaderUtilProvider,
+    GoogleServicesProvider,
+    CallNumber
   ]
 })
 export class AppModule {}

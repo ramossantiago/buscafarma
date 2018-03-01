@@ -2,6 +2,7 @@ import { Posicion } from './posicion';
 
 export class Ubicaciones {
   posicion: Posicion;
-  icono: string;
-  titulo: string;
+  imagen: string;
+  descripcion: string;
+  distancia: number;
 }

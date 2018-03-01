@@ -6,7 +6,7 @@ import { AgmDataLayer } from './../../directives/data-layer';
 import { GoogleMapsAPIWrapper } from './../google-maps-api-wrapper';
 import { Data, DataOptions, Feature } from './../google-maps-types';
 
-declare var google: any;
+//declare var google: any;
 
 /**
  * Manages all Data Layers for a Google Map instance.
