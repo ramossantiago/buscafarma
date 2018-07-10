@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 
 import {AgmPolygon} from '../../directives/polygon';
-import {GoogleMapsAPIWrapper} from '../google-maps-api-wrapper';
+//import {GoogleMapsAPIWrapper} from '../google-maps-api-wrapper';
 import {Polygon} from '../google-maps-types';
 
 @Injectable()
@@ -11,23 +11,25 @@ export class PolygonManager {
   private _polygons: Map<AgmPolygon, Promise<Polygon>> =
       new Map<AgmPolygon, Promise<Polygon>>();
 
-  constructor(private _mapsWrapper: GoogleMapsAPIWrapper, private _zone: NgZone) {}
+  //constructor(private _mapsWrapper: GoogleMapsAPIWrapper, private _zone: NgZone) {}
+
+  constructor(private _zone: NgZone) {}
 
   addPolygon(path: AgmPolygon) {
-    const polygonPromise = this._mapsWrapper.createPolygon({
-      clickable: path.clickable,
-      draggable: path.draggable,
-      editable: path.editable,
-      fillColor: path.fillColor,
-      fillOpacity: path.fillOpacity,
-      geodesic: path.geodesic,
-      paths: path.paths,
-      strokeColor: path.strokeColor,
-      strokeOpacity: path.strokeOpacity,
-      strokeWeight: path.strokeWeight,
-      visible: path.visible,
-      zIndex: path.zIndex,
-    });
+    // const polygonPromise = this._mapsWrapper.createPolygon({
+    //   clickable: path.clickable,
+    //   draggable: path.draggable,
+    //   editable: path.editable,
+    //   fillColor: path.fillColor,
+    //   fillOpacity: path.fillOpacity,
+    //   geodesic: path.geodesic,
+    //   paths: path.paths,
+    //   strokeColor: path.strokeColor,
+    //   strokeOpacity: path.strokeOpacity,
+    //   strokeWeight: path.strokeWeight,
+    //   visible: path.visible,
+    //   zIndex: path.zIndex,
+    // });
     //this._polygons.set(path, polygonPromise);
   }
 

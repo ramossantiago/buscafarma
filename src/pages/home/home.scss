@@ -1,3 +1,24 @@
 page-home {
 
+  ion-grid {
+    height: 100%;
+    border: 1px;
+    border-color: black;
+  }
+
+
+  ion-row {
+    height: 50%;
+    border: 1px;
+    border-color: black;
+  }
+
+  .color {
+    background-color: aqua;
+  }
+
+  button {
+    height: 100%;
+  }
+
 }

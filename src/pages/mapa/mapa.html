@@ -6,48 +6,73 @@
     </button>
     <button ion-button small right
             (click)="limpiarBusqueda()">
-        Limpiar
+      Limpiar
     </button>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <agm-map  [latitude]="posicionProvider.lat"
-            [longitude]="posicionProvider.lng"
+  <agm-map  [latitude]="posicionProvider.mapCenterLat"
+            [longitude]="posicionProvider.mapCenterLng"
             [zoom]="15"
             [zoomControl]="false"
             [panControl]="false"
             [clickableIcons]="false"
-            >
+            [ngClass]="(busquedaActivada)?'agm-map-slide':'agm-map-full'">
 
-    <agm-marker [latitude]="posicionProvider.lat"
-                [longitude]="posicionProvider.lng"
+    <agm-marker [latitude]="posicionProvider.deviceLat"
+                [longitude]="posicionProvider.deviceLng"
                 [markerDraggable]="true"
                 [markerClickable]="true"
-                [animation]="animation"
+                iconUrl="./assets/imgs/position.png"
                 (dragEnd)="capturarMovimiento($event)"
-                (markerClick)="click($event)"
-                >
-      <agm-info-window>
-        Aqui estas
-      </agm-info-window>
+                (markerClick)="click($event)">
     </agm-marker>
 
-    <agm-marker *ngFor="let ubicacion of ubicacionesProvider.ubicaciones"
+    <agm-marker *ngFor="let ubicacion of ubicaciones"
                 [latitude]="ubicacion.posicion.latitud"
                 [longitude]="ubicacion.posicion.longitud"
                 [markerClickable]="true"
-
+                [animation]="animation"
                 >
       <agm-info-window>
-      {{ubicacion.titulo}}
+      {{ubicacion.descripcion}}
       </agm-info-window>
     </agm-marker>
 
-    <agm-circle [visible]="circuloBusqueda"
-                [latitude]="posicionProvider.lat"
-                [longitude]="posicionProvider.lng"
+    <!-- <agm-circle [visible]="busquedaActivada"
+                [latitude]="posicionProvider.deviceLat"
+                [longitude]="posicionProvider.deviceLng"
                 [radius]="radioBusqueda">
-    </agm-circle>
+    </agm-circle> -->
   </agm-map>
+
+  <ion-fab top right edge>
+    <button ion-fab mini
+            (click)="localizame()">
+      <ion-icon name="md-globe"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-slides effect="slide" pager
+              *ngIf="busquedaActivada"
+              (ionSlideDidChange)="cambiaUbicacion()">
+
+    <ion-slide *ngFor="let ubicacion of ubicaciones" no-padding>
+        <ion-card>
+            <ion-card-header>
+              <img [src]="ubicacion.imagen | imagenMiniatura">
+              {{ ubicacion.descripcion }}
+              <button ion-button icon-only
+                      (click)="verDetalleUbicacion(ubicacion)">
+                  <ion-icon name="md-arrow-dropright-circle"></ion-icon>
+              </button>
+            </ion-card-header>
+            <ion-card-content>
+                Distancia de ti: {{ ubicacion.distancia | number: '1.2-2' }} m
+              </ion-card-content>
+          </ion-card>
+    </ion-slide>
+  </ion-slides>
+
 </ion-content>
