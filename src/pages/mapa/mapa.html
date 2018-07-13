@@ -40,11 +40,11 @@
       </agm-info-window>
     </agm-marker>
 
-    <!-- <agm-circle [visible]="busquedaActivada"
+    <agm-circle [visible]="busquedaActivada"
                 [latitude]="posicionProvider.deviceLat"
                 [longitude]="posicionProvider.deviceLng"
                 [radius]="radioBusqueda">
-    </agm-circle> -->
+    </agm-circle>
   </agm-map>
 
   <ion-fab top right edge>
@@ -70,7 +70,7 @@
             </ion-card-header>
             <ion-card-content>
                 Distancia de ti: {{ ubicacion.distancia | number: '1.2-2' }} m
-              </ion-card-content>
+            </ion-card-content>
           </ion-card>
     </ion-slide>
   </ion-slides>
