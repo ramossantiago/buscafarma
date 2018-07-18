@@ -1,15 +1,50 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button small right
-            (click)="buscarUbicaciones()" >
-      Buscar
-    </button>
-    <button ion-button small right
-            (click)="limpiarBusqueda()">
-      Limpiar
+    <button ion-button small left menuToggle>
+            <ion-icon name="md-search"></ion-icon>
+          </button>
+    <button right menuToggle="right">
+            <ion-icon name="md-menu"></ion-icon>
     </button>
   </ion-navbar>
 </ion-header>
+
+
+<ion-menu (ionOpen)=cambiarEstadoMenu() (ionClose)=cambiarEstadoMenu() id="menuBusqueda" side="left" type="overlay" [content]="mycontent">
+    <ion-header>
+        <ion-toolbar>
+          <ion-title>Menú de búsqueda</ion-title>
+        </ion-toolbar>
+      </ion-header>
+  <ion-content>
+
+      <button ion-button small right menuToggle
+            (click)="limpiarBusqueda()">
+      Limpiar
+      </button>
+
+
+      <button ion-button small menuToggle
+      (click)="buscarUbicaciones()">
+        Buscar ubicaciones
+      </button>
+
+  </ion-content>
+</ion-menu>
+
+<ion-menu (ionOpen)=cambiarEstadoMenu() (ionClose)=cambiarEstadoMenu() id="menuGeneral" side="right" type="overlay" [content]="mycontent">
+    <ion-header>
+        <ion-toolbar>
+          <ion-title>Menú general</ion-title>
+        </ion-toolbar>
+      </ion-header>
+  <ion-content>
+    Otro menu
+  </ion-content>
+</ion-menu>
+<ion-nav #mycontent [root]="MapaPage"></ion-nav>
+
+
 
 <ion-content>
   <agm-map  [latitude]="posicionProvider.mapCenterLat"
@@ -47,12 +82,15 @@
     </agm-circle>
   </agm-map>
 
-  <ion-fab top right edge>
+
+  <ion-fab middle right>
     <button ion-fab mini
             (click)="localizame()">
-      <ion-icon name="md-globe"></ion-icon>
+      <ion-icon name="md-locate"></ion-icon>
     </button>
   </ion-fab>
+
+
 
   <ion-slides effect="slide" pager
               *ngIf="busquedaActivada"

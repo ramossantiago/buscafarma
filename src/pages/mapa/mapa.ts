@@ -21,6 +21,7 @@ export class MapaPage {
 
   etiqueta: string = "YO";
   busquedaActivada: boolean = false;
+  menuActivo: boolean = false;
   radioBusqueda:number = 3500;
   animation: string = "BOUNCE";
   ubicaciones: Ubicaciones[] = [];
@@ -69,22 +70,21 @@ export class MapaPage {
           return ubi1.distancia - ubi2.distancia;
         });
 
-
-        this.busquedaActivada = true;
         this.loadingCtrl.hideLoader();
 
         // cambio el centro del mapa a la primera posicion de la busqueda
-        this.posicionProvider.cambiarCentroMapa(this.ubicaciones[0].posicion);
+        if (this.ubicaciones.length > 0) {
+          this.posicionProvider.cambiarCentroMapa(this.ubicaciones[0].posicion);
+          this.busquedaActivada = true;
+        }
+        else {
+          this.mostrarAlertaSimple("Tu búsqueda no tiene resultados, por favor intenta cambiar tu busqueda", "Ubicaciones");
+        }
       },
 
       error => {
         this.loadingCtrl.hideLoader();
-
-        this.alertCtrl.create({
-          title: "Ubicaciones",
-          subTitle: "No fue posible realizar la busqueda, por favor intenta mas tarde",
-          buttons: ['Ok']
-        }).present();
+        this.mostrarAlertaSimple("No fue posible realizar la búsqueda, por favor intenta mas tarde", "Ubicaciones");
 
       });
   }
@@ -104,6 +104,22 @@ export class MapaPage {
 
   localizame(){
     this.posicionProvider.centrarMapaEnDispositivo();
+  }
+
+  private mostrarAlertaSimple(mensaje: string, titulo: string){
+    this.alertCtrl.create({
+      title: titulo,
+      subTitle: mensaje,
+      buttons: ['Ok']
+    }).present();
+
+  }
+
+  cambiarEstadoMenu() {
+
+    this.menuActivo = !this.menuActivo;
+    console.log("menu Activo ", this.menuActivo);
+
   }
 
 

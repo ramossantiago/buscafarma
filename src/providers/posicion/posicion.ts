@@ -24,8 +24,8 @@ export class PosicionProvider {
         this.deviceLng = resp.coords.longitude;
 
         // TODO BORRAR
-        this.deviceLat = -0.292943;
-        this.deviceLng = -78.478852;
+        //this.deviceLat = -0.292943;
+        //this.deviceLng = -78.478852;
 
         this.mapCenterLat = this.deviceLat;
         this.mapCenterLng = this.deviceLng;
@@ -35,8 +35,8 @@ export class PosicionProvider {
         console.log("Error en ubicacion", error);
 
         // CAMBIAR A POSICION DEFAULT DE USUARIO
-        this.deviceLat = -0.292943;
-        this.deviceLng = -78.478852;
+        //this.deviceLat = -0.292943;
+        //this.deviceLng = -78.478852;
 
         this.alertController.create({
             title: "Ubicación",

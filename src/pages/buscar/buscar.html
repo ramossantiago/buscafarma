@@ -1,18 +1,50 @@
-<!--
-  Generated template for the BuscarPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>buscar</ion-title>
+    <ion-title>Parámetros de búsqueda</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Ubicaciones
+        </ion-list-header>
+        <!-- <ion-item-divider color="light">Radio de búsqueda: {{radioBusqueda}} metros </ion-item-divider> -->
+        <ion-item>
+            Radio de búsqueda: {{radioBusqueda}} metros
+            <ion-label>Radio de búsqueda: {{radioBusqueda}} metros</ion-label>
+            <ion-range step="50" min="50" max="5000" [(ngModel)]="radioBusqueda">
+                <ion-icon range-left small name="disc"></ion-icon>
+                <ion-icon range-right name="disc"></ion-icon>
+            </ion-range>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Mostrar rango de búsqueda</ion-label>
+          <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Mostrar dias de descuentos</ion-label>
+          <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+
+        <ion-list-header>
+            Productos
+        </ion-list-header>
+
+
+
+        <ion-item-group>
+          <ion-item right>
+            <button ion-button right>Agregar</button>
+          </ion-item>
+        </ion-item-group>
+
+        <button ion-button full icon-end (click)="buscarUbicaciones()">
+          Buscar <ion-icon name="search"></ion-icon>
+        </button>
+
+      </ion-list>
 
 </ion-content>
