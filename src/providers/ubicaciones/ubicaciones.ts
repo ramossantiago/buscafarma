@@ -15,7 +15,7 @@ export class UbicacionesProvider {
      { posicion: {latitud: -0.312426, longitud: -78.479969}, imagen: 'imagen', descripcion: '4', distancia: 1200 }
   ];
 
-  ubicaciones: Ubicaciones[] = [];
+  ubicaciones: any;
 
   constructor(private http: HttpClient) {
   }

@@ -35,6 +35,20 @@ export class MapaPage {
                private alertCtrl: AlertController,
                private loadingCtrl: LoaderUtilProvider) {
 
+      this.ubicaciones = this.navParams.get("ubicaciones");
+
+  }
+
+
+  ionViewDidLoad() {
+    console.log("Ubicaciones ", this.ubicaciones);
+
+
+    //this.ubicaciones = this.ubicacionesProvider.ubicaciones;
+    //this.posicionProvider.cambiarCentroMapa(this.ubicaciones[0].posicion);
+
+    this.busquedaActivada = true;
+
   }
 
 
@@ -116,10 +130,7 @@ export class MapaPage {
   }
 
   cambiarEstadoMenu() {
-
     this.menuActivo = !this.menuActivo;
-    console.log("menu Activo ", this.menuActivo);
-
   }
 
 
