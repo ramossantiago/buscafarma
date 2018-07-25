@@ -10,6 +10,7 @@
 </ion-header>
 
 
+<!--
 <ion-menu (ionOpen)=cambiarEstadoMenu() (ionClose)=cambiarEstadoMenu() id="menuBusqueda" side="left" type="overlay" [content]="mycontent">
     <ion-header>
         <ion-toolbar>
@@ -43,7 +44,7 @@
   </ion-content>
 </ion-menu>
 <ion-nav #mycontent [root]="MapaPage"></ion-nav>
-
+-->
 
 
 <ion-content>
@@ -68,14 +69,14 @@
                 [latitude]="ubicacion.posicion.latitud"
                 [longitude]="ubicacion.posicion.longitud"
                 [markerClickable]="true"
-                [animation]="animation"
+                [animation]="ubicacion.animacion"
                 >
       <agm-info-window>
       {{ubicacion.descripcion}}
       </agm-info-window>
     </agm-marker>
 
-    <agm-circle [visible]="busquedaActivada"
+    <agm-circle [visible]="rangoBusqueda"
                 [latitude]="posicionProvider.deviceLat"
                 [longitude]="posicionProvider.deviceLng"
                 [radius]="radioBusqueda">

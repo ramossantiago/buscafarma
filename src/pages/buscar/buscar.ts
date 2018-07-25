@@ -23,6 +23,7 @@ import { Ubicaciones } from "../../interfaces/ubicaciones";
 export class BuscarPage {
 
   radioBusqueda:number = 1000;
+  rangoBusqueda: boolean = true;
   ubicaciones: Ubicaciones[] = [];
 
   constructor(public navCtrl: NavController,
@@ -44,23 +45,30 @@ export class BuscarPage {
       data => {
         let respuestaJson = JSON.parse(JSON.stringify(data));
         this.ubicaciones = respuestaJson.ubicaciones;
-
-        console.log(this.ubicaciones);
-
         this.loadingCtrl.hideLoader();
+
+        // ordenar de manera mas cercana a mas lejana
+        this.ubicaciones = this.ubicaciones.sort( (ubi1: Ubicaciones, ubi2: Ubicaciones) => {
+          return ubi1.distancia - ubi2.distancia;
+        });
 
         if (this.ubicaciones.length <= 0) {
           this.mostrarAlertaSimple("Tu búsqueda no tiene resultados, por favor intenta nuevamente cambiando tu búsqueda", "Ubicaciones");
         } else {
-          this.navCtrl.push(MapaPage, {'ubicaciones' : this.ubicaciones});
-        }
 
+          if (this.ubicaciones.length > 0) {
+            this.ubicaciones[0].animacion = "BOUNCE";
+            this.posicionProvider.cambiarCentroMapa(this.ubicaciones[0].posicion);
+          }
+
+          this.navCtrl.push(MapaPage, {'ubicaciones' : this.ubicaciones,
+                                       'rangoBusqueda' : this.rangoBusqueda,
+                                       'radioBusqueda' : this.radioBusqueda });
+        }
       },
       error => {
         this.loadingCtrl.hideLoader();
         this.mostrarAlertaSimple("No fue posible realizar la búsqueda, por favor intenta mas tarde", "Ubicaciones");
-
-        console.log("No se puede consultar");
       });
 
   }

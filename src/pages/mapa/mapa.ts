@@ -11,6 +11,7 @@ import { LoaderUtilProvider } from "../../providers/utils/loader-util";
 
 // paginas
 import { DetalleUbicacionPage } from "../index.paginas";
+//import { animation } from '@angular/core/src/animation/dsl';
 
 @IonicPage()
 @Component({
@@ -20,13 +21,13 @@ import { DetalleUbicacionPage } from "../index.paginas";
 export class MapaPage {
 
   etiqueta: string = "YO";
-  busquedaActivada: boolean = false;
+  busquedaActivada: boolean = true;
+  rangoBusqueda: boolean = false;
   menuActivo: boolean = false;
-  radioBusqueda:number = 3500;
-  animation: string = "BOUNCE";
+  radioBusqueda:number = 1000;
+  //animation: string = "BOUNCE";
   ubicaciones: Ubicaciones[] = [];
   @ViewChild(Slides) slides: Slides;
-
 
   constructor( public navCtrl: NavController,
                public navParams: NavParams,
@@ -36,19 +37,14 @@ export class MapaPage {
                private loadingCtrl: LoaderUtilProvider) {
 
       this.ubicaciones = this.navParams.get("ubicaciones");
+      this.rangoBusqueda = this.navParams.get("rangoBusqueda");
+      this.radioBusqueda = this.navParams.get("radioBusqueda");
 
   }
 
 
   ionViewDidLoad() {
-    console.log("Ubicaciones ", this.ubicaciones);
-
-
-    //this.ubicaciones = this.ubicacionesProvider.ubicaciones;
-    //this.posicionProvider.cambiarCentroMapa(this.ubicaciones[0].posicion);
-
     this.busquedaActivada = true;
-
   }
 
 
@@ -107,7 +103,15 @@ export class MapaPage {
     let slideIndex = this.slides.getActiveIndex();
     let ubicacionActual = this.ubicaciones[slideIndex];
 
+    for (let item of this.ubicaciones){
+      item.animacion = null;
+    }
+
     if ( ubicacionActual) {
+      this.ubicaciones[slideIndex].animacion = "BOUNCE";
+      //ubicacionActual.animacion = "BOUNCE";
+      console.log("bounce");
+
       this.posicionProvider.cambiarCentroMapa(ubicacionActual.posicion);
     }
   }

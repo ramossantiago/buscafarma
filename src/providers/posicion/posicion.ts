@@ -40,7 +40,8 @@ export class PosicionProvider {
 
         this.alertController.create({
             title: "Ubicación",
-            subTitle : "No fue posibe ubicar tu dispositivo, pero puedes mover el punto a tu ubicación",
+            //subTitle : "No fue posibe ubicar tu dispositivo, pero puedes mover el punto a tu ubicación",
+            subTitle : "No fue posibe ubicar tu dispositivo " + error,
             buttons: ['Ok']
         }).present();
 
